@@ -57,8 +57,29 @@ class PlayerArrow {
     rotate(angle);
     imageMode(CENTER);
     image(this.image, 0, 0, this.width, this.height);
-    
     pop();
+    for (let i = 0; i < playerArrows.length; i++) {
+      if (playerArrows[i]!== undefined) {
+       // playerArrows[i].display();
+   
+        var bcollision = Matter.SAT.collides(
+          board1.body,
+          playerArrows[i].body
+       
+        );
+        var b2collision =Matter.SAT.collides(
+         board2.body,
+         playerArrows[i].body
+       );
+   
+   } if (bcollision.collided||b2collision.collided) {
+    console.log('collided');
+    remove();
+  }
+      
+    }
+    
+  
 
 
     //optional code to add trajectory to the arrow
@@ -73,25 +94,7 @@ class PlayerArrow {
     //   ellipse(this.trajectory[i][0], this.trajectory[i][1], 5, 5);
     // }
 
-    for (let i = 0; i < playerArrows.length; i++) {
-   if (playerArrows[i]!== undefined) {
-    // playerArrows[i].display();
-
-     var bcollision = Matter.SAT.collides(
-       board1.body,
-       playerArrows[i].body
-    
-     );
-     var b2collision =Matter.SAT.collides(
-      board2.body,
-      playerArrows[i].body
-    );
    
-   } if (bcollision.collided||b2collision.collided) {
-    console.log('collided')
-  }
-      
-    }
   }
   remove(index){
     this.isRemoved =  true
